@@ -4,6 +4,7 @@
         <hgati_converttowebp>
             <general>
                 <enable>0</enable>
+                <webp_extension>.ngx.webp</webp_extension>
             </general>
         </hgati_converttowebp>
     </default>
