@@ -22,7 +22,7 @@ class ConvertAfterImageSave
      */
     public function afterSave(Image $subject, $return, $destination = null)
     {
-		$isEnabled = $this->scopeConfig->isSetFlag('hgati_converttowebp/general/enable', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+		$isEnabled = (int)$this->scopeConfig->isSetFlag('hgati_converttowebp/general/enable', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
 		if (!$isEnabled) return;
 
 		$sourceImagePath = $destination;
