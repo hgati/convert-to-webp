@@ -5,6 +5,7 @@
             <general>
                 <enable>0</enable>
                 <webp_extension>.ngx.webp</webp_extension>
+                <enable_log>0</enable_log>
             </general>
         </hgati_converttowebp>
     </default>

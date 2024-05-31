@@ -18,6 +18,11 @@
                     <label>WebP Image Extension</label>
                     <comment>Specify the webp image extension to be handled by nginx</comment>
                 </field>
+                <field id="enable_log" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Log</label>
+                    <comment>if enabled, the log is written on var/log/system.xml</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>                
             </group>
         </section>
     </system>

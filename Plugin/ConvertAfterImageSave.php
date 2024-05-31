@@ -25,15 +25,20 @@ class ConvertAfterImageSave
      */
     public function afterSave(Image $subject, $return, $destination = null)
     {
+		$isLog = (int)$this->scopeConfig->isSetFlag('hgati_converttowebp/general/enable_log', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
 		$isEnabled = (int)$this->scopeConfig->isSetFlag('hgati_converttowebp/general/enable', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
-		if (!$isEnabled) {
+		if (!$isEnabled && $isLog) {
 			$this->logger->info('Hgati_ConvertToWebP:: Skipped due to disabled on system.xml');
 			return;
 		}
+		
 
 		$sourceImagePath = $destination;
 		$imageInfo = pathinfo($sourceImagePath);
-		if(!isset($imageInfo['extension'])) return;
+		if(!isset($imageInfo['extension'])) {
+			if($isLog) $this->logger->warning("[Warning] Hgati_ConvertToWebPp:: $imageInfo");
+			return;
+		}
 		$extension = strtolower($imageInfo['extension']);
 		if ($extension === 'jpg' || $extension === 'jpeg' || $extension === 'png') {
 			$webPImagePath = "$sourceImagePath.ngx.webp";
@@ -41,7 +46,7 @@ class ConvertAfterImageSave
 			$sourceImage = $extension === 'png' ? imagecreatefrompng($sourceImagePath) : imagecreatefromjpeg($sourceImagePath);
 			imagewebp($sourceImage, $webPImagePath, 65);
 			imagedestroy($sourceImage);
-			$this->logger->info("Hgati_ConvertToWebPp:: $webPImagePath (Quality: 65)");
+			if($isLog) $this->logger->info("Hgati_ConvertToWebPp:: $webPImagePath (Quality: 65)");
 		}
     }
 }
