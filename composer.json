@@ -1,0 +1,17 @@
+{
+    "name": "hgati/convert-to-webp",
+    "description": "Convert to webp image on product save",
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": [
+        "MIT"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Hgati\\ConvertToWebp\\": ""
+        }
+    }
+}
