@@ -27,11 +27,10 @@ class ConvertAfterImageSave
     {
 		$isLog = (int)$this->scopeConfig->isSetFlag('hgati_converttowebp/general/enable_log', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
 		$isEnabled = (int)$this->scopeConfig->isSetFlag('hgati_converttowebp/general/enable', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
-		if (!$isEnabled && $isLog) {
-			$this->logger->info('Hgati_ConvertToWebP:: Skipped due to disabled on system.xml');
+		if (!$isEnabled) {
+			if ($isLog) $this->logger->info('Hgati_ConvertToWebP:: Skipped due to disabled on system.xml');
 			return;
-		}
-		
+		}	
 
 		$sourceImagePath = $destination;
 		$imageInfo = pathinfo($sourceImagePath);
